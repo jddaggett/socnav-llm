@@ -1,5 +1,4 @@
-# SocNav-LLM
-**Learning Socially Compliant Navigation Policies from Human Demonstrations via Large Language Models**
+# Learning Socially Compliant Navigation Policies from Human Demonstrations via Large Language Models
 
 **Authors:**  
 Heyang Huang · heyang.huang@colorado.edu  
