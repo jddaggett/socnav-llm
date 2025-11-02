@@ -13,9 +13,12 @@ Each annotation describes a short segment (typically 3–10 s) of a video where 
 | `video_file` | Name of the annotated SCAND video file (from `../videos/*`) |
 | `start_time_s` | Start time of the annotated segment in seconds |
 | `end_time_s` | End time of the annotated segment in seconds |
+| `robot_type` | Robot platform used during data collection (`Spot` or `Jackal`) |
+| `environment_type` | General environment category (`indoor`, `outdoor`, `semi-outdoor`) |
+| `crowd_density` | Approximate pedestrian density during the segment (`low`, `medium`, `high`) |
 | `observed_behavior` | Short free-text description of what the robot did |
 | `social_label` | One or more standardized SCAND social navigation labels (see below) |
-| `notes` | Optional commentary, e.g. scene context or reasoning |
+| `notes` | Optional commentary, e.g., scene context or reasoning |
 
 ---
 
