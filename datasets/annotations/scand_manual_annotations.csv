@@ -1,18 +1,18 @@
-video_file,start_time_s,end_time_s,observed_behavior,social_label,notes
-A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,0,5,Robot follows group ahead at ~5 ft distance on sidewalk,With Traffic,Maintains respectful following distance behind slower pedestrians
-A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,5,26,Robot merges into a street crowded with pedestrians walking same direction,With Traffic;Navigating Through Large Crowds,Chooses path with minimal disturbance while maintaining safe clearance
-A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,26,30,Robot slows to yield to a couple pushing a stroller across its path,Yielding;Street Crossing,Stops several feet away to allow stroller to pass safely before resuming
-A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,37,44,Robot arcs left around man and child standing on sidewalk,Passing Conversational Groups;Sidewalk,Plans a wide path around stationary people instead of squeezing between them
-A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,44,49,Robot slows behind a group moving same direction while another group passes opposite,With Traffic;Against Traffic,Maintains lane discipline and avoids collisions amid two-way flow
-A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,49,53,Robot pauses as an oncoming group occupies the entire sidewalk,With Traffic;Yielding,Waits for group to clear before continuing
-A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,53,56,Robot waits for pedestrians to finish crossing before entering crosswalk,Street Crossing,Exhibits right-of-way compliance before crossing
-A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,56,60,Robot moves toward tent while staying left to avoid a turning truck,Vehicle Interaction,Adjusts lateral position to maximize distance from moving vehicle
-A_Spot_AHG_Library_Tue_Nov_16_118.mp4,0,13,Robot moves steadily along pedestrian path with traffic in same direction,With Traffic,No explicit interactions; maintains lane and nominal speed even as individuals cross laterally ahead
-A_Spot_Bass_Garage_Fri_Nov_26_134.mp4,0,3,Robot follows pedestrian flow on sidewalk maintaining social distance,With Traffic,Keeps steady pace behind multiple people ahead
-A_Spot_Bass_Garage_Fri_Nov_26_134.mp4,3,7,Robot navigates through crowded center and around groups and a queue,Passing Conversational Groups;Crossing Stationary Queue,Steers wide around line of people and small groups near building window
-A_Spot_Bass_Garage_Fri_Nov_26_134.mp4,10,14,Robot climbs four short stair sets choosing less crowded sides,Stairs;Yielding,Selects left side when right side occupied by descending pedestrians and switches sides near top when left side blocked
-A_Spot_Fountain_Greg_Mon_Dec_20_138.mp4,0,2,Robot moves along empty sidewalk with no nearby pedestrians,Sidewalk,Maintains straight trajectory at nominal pace
-A_Spot_Fountain_Greg_Mon_Dec_20_138.mp4,2,3,Robot crosses street using crosswalk,Street Crossing,Performs direct crossing at designated crosswalk
-A_Spot_Fountain_Greg_Mon_Dec_20_138.mp4,3,11,Robot turns through empty plaza area with no interactions,Sidewalk,Minimal social context; good baseline for non-interactive motion
-A_Spot_Library_Fountain_Tue_Nov_16_119.mp4,0,3.5,Robot travels along right side of sidewalk as pedestrians move opposite direction,Against Traffic,Maintains right-of-way and lane discipline relative to oncoming pedestrians
-A_Spot_Library_Fountain_Tue_Nov_16_119.mp4,3.5,4.5,Robot crosses street in crosswalk and pauses for turning cars,Street Crossing;Vehicle Interaction,Yields to vehicles performing right turns before proceeding across crosswalk
+video_file,start_time_s,end_time_s,robot_type,environment_type,crowd_density,observed_behavior,social_label,notes
+A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,0,5,Spot,outdoor,high,Robot follows group ahead at ~5 ft distance on sidewalk,With Traffic,Maintains respectful following distance behind slower pedestrians
+A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,5,26,Spot,outdoor,high,Robot merges into a street crowded with pedestrians walking same direction,With Traffic;Navigating Through Large Crowds,Chooses path with minimal disturbance while maintaining safe clearance
+A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,26,30,Spot,outdoor,high,Robot slows to yield to a couple pushing a stroller across its path,Yielding;Street Crossing,Stops several feet away to allow stroller to pass safely before resuming
+A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,37,44,Spot,outdoor,high,Robot arcs left around man and child standing on sidewalk,Passing Conversational Groups;Sidewalk,Plans a wide path around stationary people instead of squeezing between them
+A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,44,49,Spot,outdoor,high,Robot slows behind a group moving same direction while another group passes opposite,With Traffic;Against Traffic,Maintains lane discipline and avoids collisions amid two-way flow
+A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,49,53,Spot,outdoor,high,Robot pauses as an oncoming group occupies the entire sidewalk,With Traffic;Yielding,Waits for group to clear before continuing
+A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,53,56,Spot,outdoor,high,Robot waits for pedestrians to finish crossing before entering crosswalk,Street Crossing,Exhibits right-of-way compliance before crossing
+A_Spot_Rec_Tent_Fri_Nov_26_136.mp4,56,60,Spot,outdoor,high,Robot moves toward tent while staying left to avoid a turning truck,Vehicle Interaction,Adjusts lateral position to maximize distance from moving vehicle
+A_Spot_AHG_Library_Tue_Nov_16_118.mp4,0,13,Spot,outdoor,high,Robot moves steadily along pedestrian path with traffic in same direction,With Traffic,No explicit interactions; maintains lane and nominal speed even as individuals cross laterally ahead
+A_Spot_Bass_Garage_Fri_Nov_26_134.mp4,0,3,Spot,outdoor,high,Robot follows pedestrian flow on sidewalk maintaining social distance,With Traffic,Keeps steady pace behind multiple people ahead
+A_Spot_Bass_Garage_Fri_Nov_26_134.mp4,3,7,Spot,outdoor,high,Robot navigates through crowded center and around groups and a queue,Passing Conversational Groups;Crossing Stationary Queue,Steers wide around line of people and small groups near building window
+A_Spot_Bass_Garage_Fri_Nov_26_134.mp4,10,14,Spot,outdoor,high,Robot climbs four short stair sets choosing less crowded sides,Stairs;Yielding,Selects left side when right side occupied by descending pedestrians and switches sides near top when left side blocked
+A_Spot_Fountain_Greg_Mon_Dec_20_138.mp4,0,2,Spot,outdoor,low,Robot moves along empty sidewalk with no nearby pedestrians,Sidewalk,Maintains straight trajectory at nominal pace
+A_Spot_Fountain_Greg_Mon_Dec_20_138.mp4,2,3,Spot,outdoor,low,Robot crosses street using crosswalk,Street Crossing,Performs direct crossing at designated crosswalk
+A_Spot_Fountain_Greg_Mon_Dec_20_138.mp4,3,11,Spot,outdoor,low,Robot turns through empty plaza area with no interactions,Sidewalk,Minimal social context; good baseline for non-interactive motion
+A_Spot_Library_Fountain_Tue_Nov_16_119.mp4,0,3.5,Spot,outdoor,medium,Robot travels along right side of sidewalk as pedestrians move opposite direction,Against Traffic,Maintains right-of-way and lane discipline relative to oncoming pedestrians
+A_Spot_Library_Fountain_Tue_Nov_16_119.mp4,3.5,4.5,Spot,outdoor,medium,Robot crosses street in crosswalk and pauses for turning cars,Street Crossing;Vehicle Interaction,Yields to vehicles performing right turns before proceeding across crosswalk
