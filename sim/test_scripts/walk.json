@@ -1,0 +1,9 @@
+[
+  {"action": "FORWARD_MED", "duration": 3.0},
+  {"action": "TURN_LEFT",   "duration": 1.5},
+  {"action": "FORWARD_MED", "duration": 2.0},
+  {"action": "STRAFE_RIGHT","duration": 2.0},
+  {"action": "FORWARD_FAST","duration": 2.0},
+  {"action": "STOP",        "duration": 1.0},
+  {"action": "BACK_OFF",    "duration": 1.5}
+]
