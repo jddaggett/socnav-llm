@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "unit_conventions": {
+    "vx": "m/s (forward +)",
+    "vy": "m/s (left +)",
+    "wz": "rad/s (CCW +)"
+  },
+  "primitives": {
+    "STOP":          { "vx": 0.0,  "vy": 0.0,  "wz": 0.0,  "stop": true },
+    "FORWARD_SLOW":  { "vx": 0.30, "vy": 0.0,  "wz": 0.0,  "stop": false },
+    "FORWARD_MED":   { "vx": 0.60, "vy": 0.0,  "wz": 0.0,  "stop": false },
+    "FORWARD_FAST":  { "vx": 1.00, "vy": 0.0,  "wz": 0.0,  "stop": false },
+    "STRAFE_LEFT":   { "vx": 0.20, "vy": 0.30, "wz": 0.0,  "stop": false },
+    "STRAFE_RIGHT":  { "vx": 0.20, "vy": -0.30,"wz": 0.0,  "stop": false },
+    "TURN_LEFT":     { "vx": 0.0,  "vy": 0.0,  "wz": 0.80, "stop": false },
+    "TURN_RIGHT":    { "vx": 0.0,  "vy": 0.0,  "wz": -0.80,"stop": false },
+    "BACK_OFF":      { "vx": -0.25,"vy": 0.0,  "wz": 0.0,  "stop": false }
+  }
+}

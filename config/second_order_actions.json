@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.0",
+  "actions": {
+    "FOLLOW_FLOW": {
+      "description": "Move with pedestrians ahead, maintaining normal following distance and speed.",
+      "observations_required": ["distance_ahead_m", "ahead_speed_mps"],
+      "parameters": ["normal_following_distance_m", "follow_speed_tiers"]
+    },
+    "YIELD_TO_HUMAN": {
+      "description": "Pause or slow to allow a pedestrian (or group) to pass first.",
+      "observations_required": ["min_clearance_m"],
+      "parameters": ["yield_clearance_threshold_m"]
+    },
+    "BYPASS_GROUP_LEFT": {
+      "description": "Detour left to go around a stationary or slow group.",
+      "observations_required": ["left_clearance_m", "group_width_m"],
+      "parameters": ["bypass_clearance_threshold_m"]
+    },
+    "BYPASS_GROUP_RIGHT": {
+      "description": "Detour right to go around a stationary or slow group.",
+      "observations_required": ["right_clearance_m", "group_width_m"],
+      "parameters": ["bypass_clearance_threshold_m"]
+    },
+    "KEEP_RIGHT_AGAINST_TRAFFIC": {
+      "description": "Proceed while keeping right when pedestrians come toward you.",
+      "observations_required": ["oncoming_density", "right_clearance_m"],
+      "parameters": ["lane_bias_right"]
+    },
+    "MERGE_WITH_TRAFFIC": {
+      "description": "Merge into a pedestrian stream moving in the same direction.",
+      "observations_required": ["gap_size_m", "merge_heading_error_rad"],
+      "parameters": ["merge_gap_threshold_m"]
+    },
+    "WAIT_FOR_CLEAR": {
+      "description": "Stop until path ahead is free beyond a clearance threshold.",
+      "observations_required": ["path_clearance_ahead_m"],
+      "parameters": ["path_clear_threshold_m"]
+    },
+    "CROSS_AT_CROSSWALK": {
+      "description": "Cross when safe and aligned with crosswalk heading.",
+      "observations_required": ["gap_time_sec", "crosswalk_heading_error_rad"],
+      "parameters": ["crosswalk_gap_threshold_sec"]
+    },
+    "WEAVE_THROUGH_CROWD": {
+      "description": "Advance through crowd with small lateral motions while keeping minimum clearance.",
+      "observations_required": ["local_density", "left_clearance_m", "right_clearance_m"],
+      "parameters": ["crowd_min_clearance_m", "weave_step_duration_s"]
+    },
+    "PROCEED_SIDEWALK": {
+      "description": "Nominal sidewalk travel with no special interaction.",
+      "observations_required": [],
+      "parameters": ["cruise_speed_tier"]
+    }
+  }
+}
