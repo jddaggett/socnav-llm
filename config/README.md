@@ -1,6 +1,6 @@
-# Config: actions, Primitives, and Defaults
+# Config: Actions, Primitives, and Defaults
 
-This folder defines the **first-order motion primitives**, **second-order social actions**, and **context defaults** used by SocNav-LLM. The **mapping from actions → primitive sequences** is implemented in Python (`mapping.py`) for readability, tests, and version control.
+This folder defines the **first-order motion primitives**, **second-order social actions**, and **context defaults** used by SocNav-LLM. The **mapping from actions → primitive sequences** is implemented in Python (`second2first_map.py`) for readability, tests, and version control.
 
 ## Files
 
