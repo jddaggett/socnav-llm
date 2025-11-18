@@ -100,7 +100,7 @@ Your output must match the following format:
   "social_labels": ["label1", "label2"],
   "selected_actions": [
     {
-      "actions": "ACTION1_NAME", “ACTION2_NAME”
+      "action": "ACTION1_NAME"
       "reason": "Why this action is appropriate based on scene evidence."
     }
   ]
@@ -132,5 +132,5 @@ Map guidelines → second-order actions
 Justify your action choices
 Your explanation should reference visible cues (e.g., “a dense group is blocking the path ahead”).
 
-THE NEXT TEXT AFTER THIS LINE WILL BE THE USER'S DESCRIPTION OF A SCENE:
+THE NEXT TEXT AFTER THIS LINE WILL BE THE USER'S DESCRIPTION OF A SCENE, PROVIDE OUTPUT ACCORDING TO ABOVE:
 
