@@ -199,25 +199,45 @@ The downstream module will execute these primitives sequentially with adjusted v
 
 Your output must match the following format:
 
+6. CONSTRUCTING YOUR OUTPUT
+
+CRITICAL: Your response must ONLY be valid JSON. Do not include any text before or after the JSON. Do not include explanations, commentary, or markdown code blocks. Output ONLY the JSON object.
+
+Your output must EXACTLY match this format:
+
 {
   "scene_description": "A detailed but concise natural-language description",
   "social_labels": ["label1", "label2"],
   "selected_action":
     {
-      "action": "ACTION1_NAME"
+      "action": "ACTION1_NAME",
       "reason": "Why this action is appropriate based on scene evidence."
     },
   "motion_primitives":
     {
-      "primitives": ["primitive1", "primitive2", "primitive3"]
-      "reason": "Why these motion primives map to the selected high-level action "
+      "primitives": ["primitive1", "primitive2", "primitive3"],
+      "reason": "Why these motion primitives map to the selected high-level action"
     }
 }
+
+FIELD REQUIREMENTS:
+- "scene_description": Follow guidelines in step 2. String describing the scene.
+- "social_labels": Follow guidelines in step 3. Array of SCAND label strings from the predefined list.
+- "selected_action": Follow guidelines in step 4.
+  - "action": Must be ONE of the second-order action names (e.g., "KEEP_RIGHT_AGAINST_TRAFFIC")
+  - "reason": String explaining why this action fits the scene
+- "motion_primitives": Follow guidelines in step 5.
+  - "primitives": Array of 1-4 motion primitive names from the predefined list (e.g., ["STRAFE_RIGHT", "FORWARD_SLOW"])
+  - "reason": String explaining why these primitives implement the selected action
+
+REMEMBER: Output ONLY the JSON. No additional text, no explanations outside the JSON, no markdown formatting.
 
 "scene_description" guidelines are above in step 2.
 “social_labels” guidelines are above in step 3. 
 “selected_action” guidelines are above in step 4.
 "motion_primitives" guidelines are above in step 5.
+
+Description and reason strings should be as detailed as possible and can be several sentences in length.
 
 REASONING GUIDELINES
 When reasoning, identify:
