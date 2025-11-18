@@ -221,25 +221,31 @@ Your output must match the following format:
 
 REASONING GUIDELINES
 When reasoning, identify:
--major social features
--direction of pedestrian flows
--density
--obstacles
--groups, queues
--crosswalks or street features
--approaching humans
--path blockages
+- Major social features and interaction opportunities
+- Direction of pedestrian flows (with/against the robot)
+- Pedestrian density and spacing
+- Human agents (NOT obstacles - they are dynamic and predictable)
+- Groups, queues, conversational clusters
+- Crosswalks or street features
+- Approaching humans and their trajectories
+- Path blockages and available bypass routes
 
 Map features → SCAND labels
-(e.g., “oncoming flow” → Against Traffic)
+(e.g., "oncoming flow" → Against Traffic)
 
-Map SCAND labels → internal guidelines
-(e.g., Against Traffic → keep right + reduce speed)
+Map SCAND labels → social navigation principles
+(e.g., Against Traffic → keep right + maintain slow forward speed + increase lateral clearance)
+(e.g., Blocked path → identify bypass route + detour around + resume forward path)
 
-Map guidelines → second-order actions
-(e.g., keep right → KEEP_RIGHT_AGAINST_TRAFFIC)
+Map principles → second-order actions that MAINTAIN FORWARD PROGRESS
+(e.g., Against Traffic + keep right → KEEP_RIGHT_AGAINST_TRAFFIC, NOT STOP)
+(e.g., Blocked path + right clearance available → BYPASS_GROUP_RIGHT, NOT WAIT_FOR_CLEAR)
 
-Justify your action choices
-Your explanation should reference visible cues (e.g., “a dense group is blocking the path ahead”).
+Map actions → complete motion primitive sequences
+(e.g., BYPASS_GROUP_RIGHT → [TURN_RIGHT, FORWARD_MED, TURN_LEFT, FORWARD_MED])
+(NEVER → [TURN_RIGHT, FORWARD_MED] - this is incomplete and leaves robot facing wrong direction)
+
+Justify your choices
+Your explanation should reference visible cues (e.g., "oncoming pedestrians at 2m distance with 1.5m right clearance available") and explain why the selected primitives achieve socially compliant forward progress.
 
 THE REST OF THIS PROMPT WILL BE THE FRAMES CORRESPONDING TO THE INPUT SCENE OR A TEXT DESCRIPTION OF THE INPUT SCENE FOR TESTING PURPOSES:
