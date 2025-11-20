@@ -18,15 +18,3 @@ ACTIONS = {
     "TURN_RIGHT":    Action(0.0,  0.0, -0.8),
     "BACK_OFF":      Action(-0.25,0.0,  0.0),
 }
-
-def follow_flow(distance_ahead_m: float) -> Action:
-    if distance_ahead_m < 1.0:  return ACTIONS["FORWARD_SLOW"]
-    if distance_ahead_m < 1.8:  return ACTIONS["FORWARD_MED"]
-    return ACTIONS["FORWARD_FAST"]
-
-def yield_to_human(clearance_m: float) -> Action:
-    return ACTIONS["STOP"] if clearance_m < 2.0 else ACTIONS["FORWARD_SLOW"]
-
-def bypass_group(go_left: bool, clearance_ok: bool) -> Action:
-    if not clearance_ok: return ACTIONS["STOP"]
-    return ACTIONS["STRAFE_LEFT"] if go_left else ACTIONS["STRAFE_RIGHT"]

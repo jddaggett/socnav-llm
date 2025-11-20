@@ -40,3 +40,38 @@ def update_base_kinematics(model, data, vx, vy, wz, dt, stop=False):
     data.qpos[:3] = [new_x, new_y, new_z]
     data.qpos[3:7] = new_q
     mujoco.mj_forward(model, data)
+
+# ==============================================================================
+# Controller class
+class Go1BaseVelocityController:
+    def __init__(self, model, data):
+        self.model = model
+        self.data = data
+        self.dt = model.opt.timestep
+
+    def apply_action(self, action):
+        if action.stop:
+            self.data.qvel[0:6] = 0.0
+            return
+        vx_body = action.vx
+        vy_body = action.vy
+        wz      = action.wz
+
+        # current base orientation
+        q = self.data.qpos[3:7]
+        yaw = quat2yaw(q)
+        c, s = np.cos(yaw), np.sin(yaw)
+
+        # rotate body-frame velocity into world frame
+        vx_world = c * vx_body - s * vy_body
+        vy_world = s * vx_body + c * vy_body
+
+        # set base linear and angular velocity in world frame
+        # qvel[0:3] = linear vel (x,y,z)
+        # qvel[3:6] = angular vel (about x,y,z)
+        self.data.qvel[0:3] = [vx_world, vy_world, 0.0]
+        self.data.qvel[3:6] = [0.0, 0.0, wz]
+
+    def step(self, action):
+        self.apply_action(action)
+        mujoco.mj_step(self.model, self.data)

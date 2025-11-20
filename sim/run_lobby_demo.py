@@ -41,6 +41,10 @@ def main():
     data.qpos[3:7] = [0, 0, 1, 0]#rotation quaternion
     mujoco.mj_resetData(model, data)
 
+    # NEW: try using sdk-like controller
+    from control import Go1BaseVelocityController
+    controller = Go1BaseVelocityController(model, data)
+
     t_last = time.time()
 
     with viewer.launch_passive(model, data) as v:
@@ -48,9 +52,10 @@ def main():
             now = time.time()
             
             while (now - t_last) >= dt:
-                vx, vy, wz, stop = forward_action.vx, forward_action.vy, forward_action.wz, forward_action.stop
-
-                update_base_kinematics(model, data, vx, vy, wz, dt, stop)
+                # dont directly update qpos; use controller instead
+                #vx, vy, wz, stop = forward_action.vx, forward_action.vy, forward_action.wz, forward_action.stop
+                #update_base_kinematics(model, data, vx, vy, wz, dt, stop)
+                controller.step(forward_action)
 
                 data.qpos[person_qaddr] += person_speed * dt
                 mujoco.mj_step(model, data)
