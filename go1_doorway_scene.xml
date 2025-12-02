@@ -1,0 +1,32 @@
+<mujoco model="scene5_narrow_doorway">
+  <compiler angle="degree"/>
+  <option timestep="0.002" gravity="0 0 -9.81"/>
+  <include file="unitree_go1/go1.xml"/>
+
+  <asset>
+    <texture name="sky" type="skybox" builtin="gradient"
+             rgb1="0.45 0.55 0.75" rgb2="0.08 0.10 0.18" width="512" height="512"/>
+    <texture name="tex_floor" type="2d" builtin="checker"
+             width="512" height="512" rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2"
+             mark="cross" markrgb="0.8 0.8 0.8"/>
+    <material name="mat_floor" texture="tex_floor" reflectance="0.2"/>
+  </asset>
+
+  <worldbody>
+    <light name="sun" pos="0 0 5" dir="0 0 -1" directional="true"
+           diffuse="1 1 1" specular="0.1 0.1 0.1"/>
+
+    <!-- Floor -->
+    <geom name="floor" type="plane" size="10 1.5 0.1" material="mat_floor"/>
+
+    <!-- Narrow sidewalk walls (width ≈ 3m) -->
+    <geom name="wall_left" type="box" pos="0 1.5 1" size="10 0.1 1" rgba="0.9 0.9 0.9 1"/>
+    <geom name="wall_right" type="box" pos="0 -1.5 1" size="10 0.1 1" rgba="0.9 0.9 0.9 1"/>
+
+    <!-- Oncoming pedestrian (Against Traffic) -->
+    <body name="person1" pos="4 0 0">
+      <joint name="person1_slide" type="slide" axis="-1 0 0" limited="true" range="-10 10"/>
+      <geom type="capsule" size="0.25" fromto="0 0 0 0 0 1.7" rgba="1 0.7 0.7 1"/>
+    </body>
+  </worldbody>
+</mujoco>
