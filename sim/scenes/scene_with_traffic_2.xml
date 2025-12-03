@@ -1,0 +1,41 @@
+<mujoco model="scene_with_traffic_2">
+  <compiler angle="degree"/>
+  <option timestep="0.002" gravity="0 0 -9.81"/>
+  <include file="unitree_go1/go1.xml"/>
+
+ <asset>
+    <texture name="sky" type="skybox" builtin="gradient"
+             rgb1="0.45 0.55 0.75" rgb2="0.08 0.10 0.18"
+             width="512" height="512"/>
+
+    <texture name="tex_floor" type="2d" builtin="checker"
+             width="512" height="512"
+             rgb1="0.2 0.3 0.4" rgb2="0.1 0.15 0.2"
+             mark="cross" markrgb="0.8 0.8 0.8"/>
+    <material name="mat_floor" texture="tex_floor" reflectance="0.2"/>
+  </asset>
+
+  <worldbody>
+    <light name="sun" pos="0 0 5" dir="0 0 -1" directional="true"/>
+
+    <geom type="plane" size="6 6 0.1" material="mat_floor"/>
+
+    <geom type="box" pos="0 5 1"  size="6 0.1 1"/>
+    <geom type="box" pos="-6 0 1" size="0.1 6 1"/>
+    <geom type="box" pos="6 0 1"  size="0.1 6 1"/>
+
+    <!-- Human 1 -->
+    <body name="person1" pos="2 0.3 0">
+      <joint name="person1_slide" type="slide" axis="1 0 0"/>
+      <geom type="capsule" size="0.25" fromto="0 0 0 0 0 1.7" rgba="1 0.7 0.7 1"/>
+    </body>
+
+    <!-- Human 2 -->
+    <body name="person2" pos="3 -0.2 0">
+      <joint name="person2_slide" type="slide" axis="1 0 0"/>
+      <geom type="capsule" size="0.25" fromto="0 0 0 0 0 1.7" rgba="1 0.7 0.7 1"/>
+    </body>
+
+    <camera name="follow" mode="trackcom" target="trunk" pos="0 -3 0.8"/>
+  </worldbody>
+</mujoco>
