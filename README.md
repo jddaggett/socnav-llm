@@ -1,4 +1,4 @@
-# Learning Socially Compliant Navigation Policies from Human Demonstrations via Large Language Models
+# Learning Socially Compliant Navigation with Vision–Language Models and Motion Primitives
 
 **Authors:**  
 Heyang Huang · heyang.huang@colorado.edu  
@@ -6,102 +6,170 @@ Jackson Daggett · jackson.daggett@colorado.edu
 
 ---
 
-## Problem Statement & HRI Motivation
-Service and delivery robots are increasingly deployed in human-populated environments, where socially compliant navigation is essential for safety and human trust. Unlike traditional obstacle avoidance, social navigation requires robots to infer and respect implicit human norms, such as yielding at intersections, maintaining personal space, and avoiding blocking human paths. Designing explicit reward functions to capture these nuanced, context-dependent behaviors is difficult. Learning from Demonstrations (LfD) offers an alternative by directly learning policies from human trajectories, yet purely end-to-end imitation learning often lacks interpretability and adaptability. 
+##  Overview
 
-To address these challenges, our project integrates Behavior Cloning (BC) with a Vision-Language Model (VLM) for socially compliant navigation. The BC component captures low-level reactive behaviors from human demonstrations, while the VLM provides high-level semantic reasoning and interpretable action generation. We will validate the proposed framework first in a Mujoco simulation—chosen for its realistic physics and fine-grained control of humanoid environments—and later deploy it on the Unitree Go1 quadruped robot for real-world testing. The VLM (LLaVA) is deployed locally via Ollama, ensuring low-latency inference and offline reproducibility. This research aims to advance interpretable and socially aware navigation in embodied AI.
+Social navigation requires robots to move in ways that not only avoid collisions but also respect human norms—maintaining interpersonal distance, yielding appropriately, and behaving predictably in shared spaces. Traditional geometric planners struggle with these context-dependent behaviors, while end-to-end imitation learning often lacks interpretability and fails to generalize.
 
----
+This project introduces a **modular, interpretable social navigation framework** that combines:
 
-## Related Work
-Imitation learning has been widely used in navigation. The **SCAND dataset (Karnan et al., 2022)** provides large-scale teleoperated trajectories with rich multi-modal data and social interaction tags, enabling policies that reflect human norms. However, such end-to-end models often lack interpretability. **NavCon (Harel et al., 2023)** and **Code-as-Policies (Liang et al., 2023)** demonstrate modular designs where large language models generate interpretable code that invokes pre-defined APIs. **PaLM-E (Driess et al., 2023)** and **NaVILA (Cheng et al., 2024)** showcase multimodal reasoning for embodied control but without grounding in real human demonstrations. Our work builds upon these ideas by grounding VLM-driven planning within a BC-trained behavioral foundation, achieving both semantic interpretability and data-grounded social compliance.
+- A Vision–Language Model (LLaVA) for high-level semantic reasoning  
+-  A library of **8 socially grounded motion primitives**  
+-  A real-time MuJoCo simulation with Unitree Go1 and human agents  
+-  Deterministic primitive mapping for safe, consistent execution  
 
----
-
-## System Plan
-
-### Simulator & Robot
-We will use **Mujoco** as the primary simulator, given its high-fidelity dynamics, humanoid model library, and real-time **ROS2** compatibility. **Webots** may serve as an auxiliary visualization platform. The final real-world deployment will use the **Unitree Go1 quadruped robot**.
-
-### Dataset
-We will employ the **SCAND dataset**, which includes multimodal sensory streams and annotations of social interactions, for training and evaluating behavior cloning policies.
-
-### Integration Pipeline
-Our framework follows a three-layer architecture:
-1. **Low-Level Controller (BC):**  
-   Trained on SCAND trajectories to learn primitives such as `yield_to_human()`, `maintain_distance()`, and `follow_path()`.  
-2. **API Layer:**  
-   Exposes these learned primitives as callable functions through a ROS2 interface.  
-3. **High-Level Reasoner (VLM):**  
-   A locally hosted LLaVA model (via Ollama) observes visual inputs and contextual prompts, then generates structured action plans composed of API calls. This ensures semantic reasoning while maintaining behavioral grounding.
-
-### Human Simulation Setup
-To simulate social contexts, we will employ humanoid models in Mujoco to represent static or semi-dynamic pedestrians:
-- **Stage 1 – Static Human Benchmark:** humanoids remain stationary in varied poses and positions to test proxemic compliance. 
-- **Stage 2 – Semi-Dynamic Social Scenarios:** selected humanoids follow pre-defined slow trajectories to emulate natural movement. 
-
-This setup allows scalable and reproducible evaluation of social navigation performance without requiring fully interactive agents.
-
-### Metrics
-We will evaluate across four main dimensions: 
-- **Safety:** collision rate, minimum distance to obstacles. 
-- **Social Compliance:** adherence to personal space and yielding norms. 
-- **Human-Likeness:** trajectory similarity to human demonstrations. 
-- **Interpretability:** clarity and semantic coherence of VLM-generated explanations.
+The system enables a robot to reason about human–robot interactions through language, while ensuring reliable, real-time control through interpretable action primitives.
 
 ---
 
-## Evaluation Plan
+##  Key Contributions
 
-Our evaluation includes both **quantitative** and **qualitative** analyses following recent social navigation frameworks *(Singamaneni et al., 2024)*.
+- **Hybrid VLM + Motion Primitive Architecture**  
+  Structured JSON outputs from a VLM map deterministically to 8 primitives (e.g., `FORWARD_MED`, `TURN_LEFT`, `YIELD`) that encode social navigation behaviors.
 
-### Quantitative Evaluation
-In Mujoco, the robot will navigate through human-populated environments with varying densities. Metrics such as minimum interpersonal distance, path smoothness, and time-to-goal will be computed. Comparison against SCAND trajectories will assess human-likeness.
+- **Semantic, Human-Aligned Navigation**  
+  The VLM reasons about flow direction, personal space, and interaction context directly from first-person Go1 camera images.
 
-### Qualitative Evaluation
-We will assess the robot’s behavior through proxemics and social acceptance principles *(Li et al., 2019)*. For each scenario, the VLM’s natural language explanations will be analyzed to determine if they align with social norms (e.g., “yielding to a person ahead” or “keeping respectful distance”).
+- **SCAND-Inspired Social Abstractions**  
+  We distill 12 human social navigation scenarios into a compact and interpretable primitive library.
 
-### Human Models & Behavioral Modes
-1. **Fixed-Trajectory Agents:** Replay recorded human paths for baseline evaluation. 
-2. **Reactive Agents (future work):** Introduce simple rule-based or ORCA-based pedestrians to study two-way social dynamics. 
+- **Real-Time Closed-Loop Execution**  
+  LLaVA runs locally (via **Ollama**) for low-latency control, enabling practical real-time action selection.
 
-This two-tiered evaluation allows reproducible benchmarking and gradual increase of social realism.
+- **Simulation Benchmarking**  
+  We evaluate on MuJoCo in a Sidewalk scenario containing both “Following-with-Traffic’’ and “Head-On Approaching’’ interactions.
 
----
-
-## Risks & Mitigations
-
-| Risk | Mitigation |
-|------|-------------|
-| VLM outputs may be noisy or unsafe | Constrain output via API calls; enforce safety filters at the BC level. |
-| Domain gap between SCAND and MuJoCo | Collect additional small-scale demonstrations in simulation for fine-tuning. |
-| Latency in VLM inference | Run LLaVA locally via **Ollama** for real-time inference and predictable response. |
+- **Improved Social Compliance over Geometric Baselines**  
+  Experiments show smoother trajectories, fewer oscillations, and better adherence to proxemics than RRT-based planners.
 
 ---
 
-## Timeline (Approx. 8 Weeks)
+##  System Architecture
 
-| Weeks | Milestones |
-|--------|-------------|
-| 1–2 | Literature review, SCAND baseline reproduction |
-| 3–4 | BC primitive design, VLM integration (LLaVA via Ollama) |
-| 5–6 | MuJoCo environment setup with humanoid social agents |
-| 7–8 | Evaluation, analysis, and final report preparation |
+Our navigation stack includes four layers:
 
+### **1. Perception Layer (Go1 FPV Camera)**
+- Captures first-person RGB images from the Unitree Go1 model in MuJoCo.
+
+### **2. Vision–Language Reasoning (LLaVA via Ollama)**
+- Receives FPV image and a structured system prompt.  
+- Produces **constrained JSON** specifying:  
+  ```json
+  {
+      "action": "FOLLOW_FLOW_LEFT",
+      "principle": "Maintain safe distance and match crowd direction."
+  }
+
+### **3. Scenario Interpreter & Primitive Mapper**
+
+- Maps high-level actions to sequences of first-order motion primitives
+   (e.g., `FOLLOW_FLOW_LEFT → [STRAFE_LEFT, FORWARD_MED]`).
+
+### **4. Low-Level Execution**
+
+- Sends velocity commands to the Go1 controller.
+- Ensures safety (min-distance filters, clipped velocities).
+
+## Motion Primitive Library
+
+We define **8 atomic primitives**, grounded in SCAND’s taxonomy:
+
+| Primitive           | Description                             |
+| ------------------- | --------------------------------------- |
+| `FORWARD_SLOW`      | Careful approach or following           |
+| `FORWARD_MED`       | Normal walking speed                    |
+| `FORWARD_FAST`      | Catching up or overtaking               |
+| `STRAFE_LEFT/RIGHT` | Side-stepping to respect personal space |
+| `TURN_LEFT/RIGHT`   | Heading adjustment                      |
+| `STOP`              | Yielding or waiting                     |
+
+These primitives serve as a **socially meaningful action vocabulary**, enabling interpretable planning.
+
+##  Social Scenario Abstractions
+
+Based on SCAND, we define **12 canonical social navigation scenarios**, including:
+
+- Head-on approaching
+- Following with traffic
+- Crossing paths
+- Merging into flow
+- Passing / overtaking
+- Group avoidance
+
+The VLM is prompted with these definitions to ground its semantic reasoning.
+
+## Experiments & Results
+
+### **Scenario: Sidewalk Navigation**
+
+The robot encounters two human agents—one moving with traffic, one moving against it.
+
+<img src="file:///C:/Users/Huang%20Heyang/Desktop/Project/sidewalk.png" alt="img" style="zoom:67%;" />
+
+### **Results**
+
+- The RRT baseline shows **large oscillations** and frequent violations of the **1.2 m personal space threshold**.
+- The VLM-driven policy maintains **smooth, monotonic interpersonal distances**.
+- Both following and head-on interactions are handled gracefully.
+
+### **User Study**
+
+A pilot survey (N=20) indicates that participants perceive VLM-driven behavior as:
+
+- More natural
+- More polite
+- More comfortable to walk around
+
+<img src="file:///C:/Users/Huang%20Heyang/Desktop/Project/survey_q1_preference.png" alt="img" style="zoom:30%;" />
+
+### **How To Run It?**
+
+#### 1. Prerequisites
+
+- Python 3.9+ 
+- A GPU with CUDA support (RTX 30/40)  
+- MuJoCo (tested on MuJoCo Python bindings v3.1.1) 
+- Ollama for local LLaVA inference (or another locally hosted VLM)  
 ---
 
-## Resource Needs
+#### 2. Clone the Repository
 
-**Compute:** RTX 4090 GPU for BC training and LLaVA inference.
-**Software:** Mujoco (main simulator), Webots (optional visualization), ROS2 for integration.  
-**Dataset:** SCAND dataset (publicly available).
-**Hardware:** Unitree Go1 quadruped robot for real-world deployment. 
+```bash
+git clone https://github.com/jddaggett/socnav-llm.git
+cd socnav-llm
+```
 
----
+#### **3. Install MuJoCo + GLFW**
 
-## Expected Contributions
-- A modular framework that unites demonstration-grounded BC and VLM-based semantic reasoning for interpretable social navigation. 
-- A benchmark of socially compliant navigation behaviors in Mujoco using humanoid-based social contexts. 
-- A reproducible open-source implementation bridging LLaVA reasoning with ROS2 motion primitives.
+Mac/Linux:
 
----
+```
+sudo apt install libglfw3-dev
+```
+
+Windows:
+ Follow the MuJoCo installation docs.
+
+#### **4. Install Ollama + LLaVA**
+
+```
+brew install ollama
+ollama pull llava
+```
+### Running the Simulation
+Start the VLM Server
+ollama run llava
+
+Launch Navigation Controller
+python sim/vlm_socnav.py
+
+## Known Limitations & Future Work
+
+- Evaluation currently limited to simulation
+- VLM inference at low frequency (~2 Hz)
+- Primitive library may need expansion for dense crowds
+- Future versions: reactive pedestrians, end-to-end VLA refinement
+
+## Acknowledgments
+
+We thank the authors of SCAND, LLaVA, and Unitree Go1 models.
+This project was developed for CSCI 5322: Algorithmic Foundations of Human-Robot Interaction at CU Boulder.
