@@ -103,7 +103,7 @@ The VLM is prompted with these definitions to ground its semantic reasoning.
 
 The robot encounters two human agents—one moving with traffic, one moving against it.
 
-<img src="file:///C:/Users/Huang%20Heyang/Desktop/Project/sidewalk.png" alt="img" style="zoom:67%;" />
+<img src="sidewalk.png" width="400">
 
 ### **Results**
 
@@ -119,7 +119,7 @@ A pilot survey (N=20) indicates that participants perceive VLM-driven behavior a
 - More polite
 - More comfortable to walk around
 
-<img src="file:///C:/Users/Huang%20Heyang/Desktop/Project/survey_q1_preference.png" alt="img" style="zoom:30%;" />
+<img src="survey_q1_preference.png" width="400">
 
 ### **How To Run It?**
 
