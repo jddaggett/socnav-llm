@@ -113,7 +113,7 @@ The robot encounters two human agents—one moving with traffic, one moving agai
 
 ### **User Study**
 
-A pilot survey (N=20) indicates that participants perceive VLM-driven behavior as:
+A pilot survey (N=19) indicates that participants perceive VLM-driven behavior as:
 
 - More natural
 - More polite
