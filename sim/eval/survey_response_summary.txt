@@ -1,0 +1,27 @@
+Question 1: Which robot do you prefer?
+--------------------------------------------------------------------------------
+  Following Person          - VLM: 13 ( 68.4%)  |  RRT*:  6 ( 31.6%)
+  Against Traffic           - VLM: 16 ( 84.2%)  |  RRT*:  3 ( 15.8%)
+  Navigating Sidewalk       - VLM: 14 ( 73.7%)  |  RRT*:  5 ( 26.3%)
+  Narrow Hallway            - VLM: 14 ( 73.7%)  |  RRT*:  5 ( 26.3%)
+  Bypassing Group           - VLM: 13 ( 68.4%)  |  RRT*:  6 ( 31.6%)
+  OVERALL                   - VLM: 70 ( 73.7%)  |  RRT*: 25 ( 26.3%)
+
+Question 2: Which robot would you feel more comfortable around?
+--------------------------------------------------------------------------------
+  Following Person          - VLM: 15 ( 78.9%)  |  RRT*:  4 ( 21.1%)
+  Against Traffic           - VLM: 16 ( 84.2%)  |  RRT*:  3 ( 15.8%)
+  Navigating Sidewalk       - VLM: 15 ( 78.9%)  |  RRT*:  4 ( 21.1%)
+  Narrow Hallway            - VLM: 14 ( 73.7%)  |  RRT*:  5 ( 26.3%)
+  Bypassing Group           - VLM: 12 ( 63.2%)  |  RRT*:  7 ( 36.8%)
+  OVERALL                   - VLM: 72 ( 75.8%)  |  RRT*: 23 ( 24.2%)
+
+Question 3: Which robot appears to respect the humans' personal space the best?
+--------------------------------------------------------------------------------
+  Following Person          - VLM: 18 ( 94.7%)  |  RRT*:  1 (  5.3%)
+  Against Traffic           - VLM: 16 ( 84.2%)  |  RRT*:  3 ( 15.8%)
+  Navigating Sidewalk       - VLM: 15 ( 78.9%)  |  RRT*:  4 ( 21.1%)
+  Narrow Hallway            - VLM: 15 ( 78.9%)  |  RRT*:  4 ( 21.1%)
+  Bypassing Group           - VLM: 14 ( 73.7%)  |  RRT*:  5 ( 26.3%)
+  OVERALL                   - VLM: 78 ( 82.1%)  |  RRT*: 17 ( 17.9%)
+================================================================================
